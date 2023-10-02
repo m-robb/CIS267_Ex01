@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Collectable : MonoBehaviour {
 	public int collectableValue;
-	public GameObject playerObject; //We need a reference to PlayerScore.cs script. That script is attached to the player.
+	//public GameObject playerObject; //We need a reference to PlayerScore.cs script. That script is attached to the player.
 	private PlayerScore gameScore; //This is the PlayerScore.cs script.
 
 
@@ -20,17 +20,21 @@ public class Collectable : MonoBehaviour {
 		//playerObject = GameObject.Find("Player");
 
 		//Cannot just use GetComponent because PlayerScore.cs is not attached to the collectable.
-		gameScore = playerObject.GetComponent<PlayerScore>();
+		//gameScore = playerObject.GetComponent<PlayerScore>();
 	}
 
 	// Update is called once per frame
 	void Update() {}
 
+	public void destroyCollectable() {
+		Destroy(this.gameObject);
+	}
 
-	private void OnTriggerEnter2D(Collider2D collision) {
-		if (collision.gameObject.CompareTag("Player")) {
-			gameScore.setPlayerScore(collectableValue);
-			Destroy(this.gameObject);
-		}
+	public int getCollectableValue() {
+		return collectableValue;
+	}
+
+	public void setCollectableValue(int value) {
+		collectableValue = value;
 	}
 }

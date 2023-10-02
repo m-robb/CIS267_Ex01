@@ -66,5 +66,14 @@ public class PlayerMovement : MonoBehaviour {
 			Destroy(collision.gameObject);
 			maxNumJumps = 2;
 		}
+		else if (collision.gameObject.CompareTag("CoinCollectable")) {
+			/* Get value of collectable, add it to the score. */
+			int collectableValue = collision.GetComponent<Collectable>().getCollectableValue();
+			this.GetComponent<PlayerScore>().setPlayerScore(collectableValue);
+
+			/* Destroy the collectable. */
+			collision.GetComponent<Collectable>().destroyCollectable();
+
+		}
 	}
 }
