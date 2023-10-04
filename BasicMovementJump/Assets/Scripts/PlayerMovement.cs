@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class PlayerMovement : MonoBehaviour {
+	public GameObject gameManager;
+	private GameManager gm;
 	//gravity: 5
 	private Rigidbody2D playerRigidBody;
 	//8
@@ -15,6 +17,7 @@ public class PlayerMovement : MonoBehaviour {
 	private int maxNumJumps;
 	// Start is called before the first frame update
 	void Start() {
+		gm = gameManager.GetComponent<GameManager>();
 		playerRigidBody = GetComponent<Rigidbody2D>();
 		maxNumJumps = 1;
 		numJumps = 0;
@@ -54,7 +57,8 @@ public class PlayerMovement : MonoBehaviour {
 	private void OnCollisionEnter2D(Collision2D collision) {
 		if (collision.gameObject.CompareTag("OB")) {
 			//Need to import SceneManagement
-			SceneManager.LoadScene("SampleScene");
+			/* SceneManager.LoadScene("SampleScene"); */
+			gm.setGameOver(true);
 		}
 		else if (collision.gameObject.CompareTag("Ground")) {
 			numJumps = 0;

@@ -7,10 +7,15 @@ using UnityEngine.SceneManagement;
 public class Timer : MonoBehaviour {
 	private float time;
 	private TMP_Text guiTime;
+	public GameObject gameManager;
+	private GameManager gm;
 
 	void Start() {
+		gm = gameManager.GetComponent<GameManager>();
 		guiTime = GetComponent<TMP_Text>();
-		time = 20;
+		time = 5;
+
+		updateGUITime();
 	}
 
 	private void Update() {
@@ -18,7 +23,8 @@ public class Timer : MonoBehaviour {
 		updateGUITime();
 
 		if (timeUp()) {
-			SceneManager.LoadScene("SampleScene");
+			/* SceneManager.LoadScene("SampleScene"); */
+			gm.setGameOver(true);
 		}
 	}
 
@@ -31,6 +37,7 @@ public class Timer : MonoBehaviour {
 	}
 
 	public bool timeUp() {
+		/* return time <= 0 ? true : false; */
 		if (time <= 0) { return true; }
 
 		return false;
