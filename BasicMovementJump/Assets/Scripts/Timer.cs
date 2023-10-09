@@ -13,7 +13,7 @@ public class Timer : MonoBehaviour {
 	void Start() {
 		gm = gameManager.GetComponent<GameManager>();
 		guiTime = GetComponent<TMP_Text>();
-		time = 5;
+		time = 20;
 
 		updateGUITime();
 	}
