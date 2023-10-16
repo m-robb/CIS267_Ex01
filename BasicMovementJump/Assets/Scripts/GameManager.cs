@@ -3,15 +3,23 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour {
+	public GameObject player;
+
+	private PlayerScore playerScore;
 	private bool gameOver;
 
 
 	private void Start() {
-		/* gameOver = false; */
+		playerScore = player.GetComponent<PlayerScore>();
 		setGameOver(false);
+
+		Debug.Log("High Score: " + SaveData.loadScore());
 	}
 
-	public bool getGameOver() { return gameOver; }
+	public bool getGameOver() {
+		return gameOver;
+	}
+
 	public void setGameOver(bool g) {
 		gameOver = g;
 		evaluateGameState();
@@ -19,6 +27,7 @@ public class GameManager : MonoBehaviour {
 
 	public void evaluateGameState() {
 		if (gameOver) {
+			SaveData.saveScore(playerScore.getScore());
 			Time.timeScale = 0.0f;
 		}
 		else {
